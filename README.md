@@ -2,11 +2,82 @@
 This repository is a curated collection of my journey through learning and mastering various algorithms and data structures using JavaScript. It serves as both a personal reference and a resource for others who are keen to enhance their understanding of these foundational concepts in computer science.
 
 ## Table of Contents
+- [Big O notation](#big-o-notation)
 - [Frequency Counter](#frequency-counter)
 - [Multiple Pointers](#multiple-pointers)
 - [Sliding Window](#sliding-window)
+ 
+ ___ 
   
+## Big O notation
 
+Big O notation is a way to describe the efficiency of an algorithm in terms of time or space complexity. It provides an upper bound on the growth rate of the algorithm's resource requirements (e.g., time or memory) as the input size increases.
+
+### Key Concepts
+  
+- **Time Complexity**: How the running time of an algorithm grows with the size of the input.
+- **Space Complexity**: How the memory usage of an algorithm grows with the size of the input.
+
+### Common Big O Notations
+
+![Big O](https://cdn-media-1.freecodecamp.org/images/1*KfZYFUT2OKfjekJlCeYvuQ.jpeg "Big O Notations")
+
+- **O(1): Constant Time** The algorithm’s runtime does not change with the size of the input.
+  - **Example**: Accessing an element in an array by index.
+  
+```javascript
+    function getElement(arr, index) {
+    return arr[index];  // O(1)
+    }
+```
+
+- **O(n): Linear Time** The runtime grows linearly with the input size.
+  - **Example**: Iterating through an array.
+  
+```javascript
+    function printElements(arr) {
+    for (const element of arr) {
+        console.log(element);  // O(n)
+    }
+}
+```
+
+- **O(n^2): The runtime grows quadratically with the input size. Often seen in algorithms with nested loops.
+  - **Example**: Bubble sort.
+  
+```javascript
+    function bubbleSort(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];  // O(n^2)
+            }
+        }
+    }
+    return arr;
+}
+```
+
+- **O(log n): Logarithmic Time** The runtime grows logarithmically with the input size. Common in algorithms that divide the problem in half each time.
+  - **Example**: Binary search.
+```javascript
+   function binarySearch(arr, target) {
+    let left = 0;
+    let right = arr.length - 1;
+
+    while (left <= right) {
+        const mid = Math.floor((left + right) / 2);
+
+        if (arr[mid] === target) return mid;
+        if (arr[mid] < target) left = mid + 1;
+        else right = mid - 1;
+    }
+
+    return -1;  // O(log n)
+}
+```
+
+Understanding Big O notation helps you evaluate and compare the efficiency of different algorithms and choose the most suitable one based on the problem constraints and input size. 
 
 ___
 
