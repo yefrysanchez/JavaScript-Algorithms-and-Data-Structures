@@ -4,6 +4,8 @@ This repository is a curated collection of my journey through learning and maste
 ## Table of Contents
 - [Frequency Counter](#frequency-counter)
 - [Multiple Pointers](#multiple-pointers)
+- [Sliding Window](#sliding-window)
+  
 
 
 ___
@@ -104,4 +106,56 @@ console.log(result);  // Output: [3, 7]
 - **Repeat Until Pointers Meet**: Continue this process until the left pointer is no longer less than the right pointer.
 - **Return Result**: If we find a pair that meets the criteria, return it; otherwise, return null if no such pair exists.
 
-  
+ ___
+
+## Sliding Window
+
+The **Sliding Window** technique is a powerful approach for solving problems that involve arrays or strings, particularly when you need to find subarrays or substrings with specific properties. It involves creating a window (a range of elements) that moves across the data structure to maintain or calculate certain properties.
+
+### How It Works
+
+- **Initialize Window**: Start with a window that covers a certain range of elements.
+- **Expand or Contract the Window**: Adjust the window size or position as needed based on the problem requirements.
+- **Update and Check**: Calculate or check the desired properties as the window slides.
+
+### Example: Maximum Sum of a Subarray of Fixed Size
+
+Let’s use the sliding window technique to find the maximum sum of a subarray of a given size ```k``` in a list of integers.
+
+Problem: Given an array ```arr``` and an integer ```k```, find the maximum sum of any contiguous subarray of size ```k```.
+
+```javascript
+function maxSumSubarray(arr, k) {
+    let maxSum = 0;    // Variable to store the maximum sum
+    let windowSum = 0; // Variable to store the current window sum
+
+    // Calculate the sum of the first window
+    for (let i = 0; i < k; i++) {
+        windowSum += arr[i];
+    }
+    maxSum = windowSum; // Initialize maxSum with the sum of the first window
+
+    // Slide the window across the array
+    for (let i = k; i < arr.length; i++) {
+        // Add the next element and subtract the element that's sliding out
+        windowSum += arr[i] - arr[i - k];
+        maxSum = Math.max(maxSum, windowSum); // Update maxSum if needed
+    }
+
+    return maxSum;
+}
+
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const k = 3;
+const result = maxSumSubarray(numbers, k);
+
+console.log(result);  // Output: 24 (which is the sum of [7, 8, 9])
+```
+
+### Explanation
+- **Initial Window Sum**: Calculate the sum of the first k elements. This sum will serve as the initial window sum.
+- **Slide the Window**: Move the window one element to the right:
+  - Add the new element that is entering the window.
+  - Subtract the element that is leaving the window.
+- **Update Maximum Sum**: Compare the current window sum to the maximum sum found so far and update if the current sum is larger.
+- **Return Result**: After sliding through the entire array, return the maximum sum found.
